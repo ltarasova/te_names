@@ -37,11 +37,11 @@ var phone=fPhones[Math.floor(Math.random()*fPhones.length)];
 var email=fEmail[Math.floor(Math.random()*fEmail.length)];
 
 eSurname = document.getElementById('reservationStepSurname');
-eSurname.value = name;
+eSurname.value = surname;
 eSurname.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
 
 eFirstname = document.getElementById('reservationStepFirstName');
-eFirstname.value = surname;
+eFirstname.value = name;
 eFirstname.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
 
 ePhone = document.getElementById('reservationStepPhone');
@@ -53,4 +53,3 @@ eEmail = document.getElementById('reservationStepEmail');
 eEmail.value = email;
 eEmail.focus();
 eEmail.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
-                                      

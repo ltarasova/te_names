@@ -1,7 +1,7 @@
 {
-	"name": "Getting Started Names",
-	"version": "1.0",
-	"description": "Build an Extension!",
+	"name": "Generate names",
+	"version": "2.0",
+	"description": "Generate names for Smart Ticketing",
 	"permissions": ["activeTab", "declarativeContent", "storage"],
 	"background": {
 		"scripts": ["background.js"],
@@ -9,6 +9,7 @@
 	},
 	"page_action": {
 		"default_popup": "popup.html",
+		"default_tooltip": "Generate names for Smart Ticketing",
 		"default_icon": {
 			"16": "images/get_started16.png",
 			"32": "images/get_started32.png",

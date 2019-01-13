@@ -6,12 +6,8 @@ var mSurname = ["BARKOV", "OTSCHEPENKO", "KOZYREV", "LEVASHEV","ALEXEENKO","PETR
 
 var fSurname = ["OTSCHEPENKO", "BYKOVA", "PETROSYAN", "ZATOCHNAIIA","ALEXEENKO","MOYSYUK", "SMAGINA","ORLOVA","SHKIREEVA","PAK","YUSUPOVA","SKOROKHOD","KAZLAUSKAITE","PETRAUSKAITE","JANKAUSKAITE","STANKEVICH","VASILIAUSKAITE","URBONAITE","KAVALIAUSKAITE","VOYTOVICH","PROKHOZHAEVA","ABRAMOVA","VIDMAN","SEREBRIAKOVA","BOGDANOVSKAIA","BUTAKOVA","FILATOVA","PANOVA","KOTLYAROVA","YAKOVLEVA","SOBOLEVA","BELOBORODOVA","BESSONOVA","KOBESOVA","SHARIPOVA","VASIUKOVA","SHKAPICH","TITOVA","KHOKHLOVA","TSKHE","FROLOVICH","GUSELNIKOVA","SMIRNOVA","PAVLUITENKO","USKOVA","LYUBINA","GRISHAEVA","YANKOVICH","SAMOILOVA","ABBASOVA","PROSUTINSKAYA","TOPONOGOVA","SAGACH","SHARDAKOVA","POCHEKAEVA"];
 
-var fPhones = ["(913) 405-2111", "(905) 221-2445", "(910) 451-2467"];
-
-var fEmail = ["nemo@mail.ru"];
-
-var mSecName = ["ANDREEVICH", "ALEXEEVICH", "VLADIMIROVICH", "PETROVICH","TIMERGALIEVICH","RUBENOVICH","AVDEEVICH","GERASIMOVICH"];
-var fSecName = ["ANDREEVNA", "PETROVNA", "ASHOTOVNA", "TIMOFEEVNA","EVGENIEVNA","KASIANOVNA","EDUARDOVNA","SPIRIDONOVNA","RODIONOVNA"];
+var mSecName = ["ANDREEVICH", "ALEXEEVICH", "VLADIMIROVICH", "PETROVICH","TIMERGALIEVICH","RUBENOVICH","AVDEEVICH","GERASIMOVICH","AGAFONOVICH","POTAPOVICH"];
+var fSecName = ["ANDREEVNA", "PETROVNA", "ASHOTOVNA", "TIMOFEEVNA","EVGENIEVNA","KASIANOVNA","EDUARDOVNA","SPIRIDONOVNA","RODIONOVNA","LEVOVNA","ROMANOVNA"];
 
 var sex = [1, 0];
 
@@ -20,21 +16,12 @@ var display = sex[Math.floor(Math.random()*2)];
 if (display){
 	var name=mName[Math.floor(Math.random()*mName.length)];
 	var surname=mSurname[Math.floor(Math.random()*mSurname.length)];
-	var otch=mSecName[Math.floor(Math.random()*mSecName.length)];
-
-	document.getElementById('reservationStepRadioMale').focus();
-	document.getElementById('reservationStepRadioMale').checked=true;
-//	document.getElementById('reservationStepRadioMale').dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
+	var fathername=mSecName[Math.floor(Math.random()*mSecName.length)];
 } else {
 	var name=fName[Math.floor(Math.random()*fName.length)];
 	var surname=fSurname[Math.floor(Math.random()*fSurname.length)];
-	var otch=fSecName[Math.floor(Math.random()*fSecName.length)];	
-
-        document.getElementById('reservationStepRadioFemale').checked=true;
+	var fathername=fSecName[Math.floor(Math.random()*fSecName.length)];
 };
-
-var phone=fPhones[Math.floor(Math.random()*fPhones.length)];
-var email=fEmail[Math.floor(Math.random()*fEmail.length)];
 
 eSurname = document.getElementById('reservationStepSurname');
 eSurname.value = surname;
@@ -44,12 +31,6 @@ eFirstname = document.getElementById('reservationStepFirstName');
 eFirstname.value = name;
 eFirstname.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
 
-ePhone = document.getElementById('reservationStepPhone');
-ePhone.value = phone;
-ePhone.focus();
-ePhone.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
-
-eEmail = document.getElementById('reservationStepEmail');
-eEmail.value = email;
-eEmail.focus();
-eEmail.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
+eFathername = document.getElementById('reservationStepMiddleName');
+eFathername.value = fathername;
+eFathername.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));

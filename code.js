@@ -77,23 +77,23 @@ var sex = [1, 0];
 var display = sex[Math.floor(Math.random()*2)];
 
 if (display){
-	var name=mName[Math.floor(Math.random()*mName.length)];
-	var surname=mSurname[Math.floor(Math.random()*mSurname.length)];
+	var name_pax=mName[Math.floor(Math.random()*mName.length)];
+	var surname_pax=mSurname[Math.floor(Math.random()*mSurname.length)];
 	var fathername=mSecName[Math.floor(Math.random()*mSecName.length)];
 	simulate(document.getElementById('reservationStepRadioMale'), "click");
 } else {
-	var name=fName[Math.floor(Math.random()*fName.length)];
-	var surname=fSurname[Math.floor(Math.random()*fSurname.length)];
+	var name_pax=fName[Math.floor(Math.random()*fName.length)];
+	var surname_pax=fSurname[Math.floor(Math.random()*fSurname.length)];
 	var fathername=fSecName[Math.floor(Math.random()*fSecName.length)];
 	simulate(document.getElementById('reservationStepRadioFemale'), "click");
 };
 
 eSurname = document.getElementById('reservationStepSurname');
-eSurname.value = surname;
+eSurname.value = surname_pax;
 eSurname.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
 
 eFirstname = document.getElementById('reservationStepFirstName');
-eFirstname.value = name;
+eFirstname.value = name_pax;
 eFirstname.dispatchEvent(new KeyboardEvent('keydown',  {'key':'Enter'}));
 
 eFathername = document.getElementById('reservationStepMiddleName');

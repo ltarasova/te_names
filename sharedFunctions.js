@@ -1,4 +1,3 @@
-//----------------------------------------------------------------------------------------------------//
 function simulate(element, eventName) {
     var options = extend(defaultOptions, arguments[2] || {});
     var oEvent, eventType = null;
@@ -32,6 +31,7 @@ function simulate(element, eventName) {
     }
     return element;
 }
+
 
 function extend(destination, source) {
     for (var property in source)
@@ -69,53 +69,69 @@ var fSecName = ["ANDREEVNA", "PETROVNA", "ASHOTOVNA", "TIMOFEEVNA", "EVGENIEVNA"
 
 var sex = [1, 0];
 
-var display = sex[Math.floor(Math.random() * 2)];
-
-var name_pax;
-var surname_pax;
-var fathername;
-if (display) {
-    name_pax = mName[Math.floor(Math.random() * mName.length)];
-    surname_pax = mSurname[Math.floor(Math.random() * mSurname.length)];
-    fathername = mSecName[Math.floor(Math.random() * mSecName.length)];
-    simulate(document.getElementById('reservationStepRadioMale'), "click");
-} else {
-    name_pax = fName[Math.floor(Math.random() * fName.length)];
-    surname_pax = fSurname[Math.floor(Math.random() * fSurname.length)];
-    fathername = fSecName[Math.floor(Math.random() * fSecName.length)];
-    simulate(document.getElementById('reservationStepRadioFemale'), "click");
-}
-eSurname = document.getElementById('reservationStepSurname');
-eSurname.value = surname_pax;
-eSurname.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
-
-eFirstname = document.getElementById('reservationStepFirstName');
-eFirstname.value = name_pax;
-eFirstname.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
-
-eFathername = document.getElementById('reservationStepMiddleName');
-if (eFathername) {
-    eFathername.value = fathername;
-    eFathername.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+function getRandomArbitrary(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
 }
 
-ePhone = document.getElementById('reservationStepPhone');
-ePhone.value = '7777777777';
-ePhone.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
+
+function fillPassengerData(age) {
+    var display = sex[Math.floor(Math.random() * 2)];
+
+    var name_pax;
+    var surname_pax;
+    var fathername;
+    if (display) {
+        name_pax = mName[Math.floor(Math.random() * mName.length)];
+        surname_pax = mSurname[Math.floor(Math.random() * mSurname.length)];
+        fathername = mSecName[Math.floor(Math.random() * mSecName.length)];
+        simulate(document.getElementById('reservationStepRadioMale'), "click");
+    } else {
+        name_pax = fName[Math.floor(Math.random() * fName.length)];
+        surname_pax = fSurname[Math.floor(Math.random() * fSurname.length)];
+        fathername = fSecName[Math.floor(Math.random() * fSecName.length)];
+        simulate(document.getElementById('reservationStepRadioFemale'), "click");
+    }
+    eSurname = document.getElementById('reservationStepSurname');
+    eSurname.value = surname_pax;
+    eSurname.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+
+    eFirstname = document.getElementById('reservationStepFirstName');
+    eFirstname.value = name_pax;
+    eFirstname.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+
+    eFathername = document.getElementById('reservationStepMiddleName');
+    if (eFathername) {
+        eFathername.value = fathername;
+        eFathername.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+    }
+
+    ePhone = document.getElementById('reservationStepPhone');
+    ePhone.value = '7777777777';
+    ePhone.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
 
 
-eBirthDate = document.getElementById('reservationStepBirthDate');
-eBirthDate.value = '04051950';
-eBirthDate.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
-eBirthDate.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+    let now = new Date();
+    now.setFullYear(now.getFullYear() - age);
 
-eDocSeries = document.getElementById('reservationStepDocSeries');
-eDocSeries.value = '1234';
-eDocSeries.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
-eDocSeries.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+    eBirthDate = document.getElementById('reservationStepBirthDate');
+    eBirthDate.value = "" + pad(now.getDate(), 2) + pad(now.getMonth(), 2) + now.getFullYear();
+
+    eBirthDate.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+    eBirthDate.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+
+    eDocSeries = document.getElementById('reservationStepDocSeries');
+    eDocSeries.value = '1234';
+    eDocSeries.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+    eDocSeries.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
 
 
-eDocNumber = document.getElementById('reservationStepDocNumber');
-eDocNumber.value = '123456';
-eDocNumber.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
-eDocNumber.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+    eDocNumber = document.getElementById('reservationStepDocNumber');
+    eDocNumber.value = '123456';
+    eDocNumber.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+    eDocNumber.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+}

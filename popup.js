@@ -4,10 +4,18 @@
 
 'use strict';
 
-let changeColor = document.getElementById('changeColor');
+document.getElementById('fillPassengerDataADT').onclick = function (element) {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.executeScript(tabs[0].id, {file: 'sharedFunctions.js'}, function () {
+            chrome.tabs.executeScript(tabs[0].id, {file: "fillAdultPassengerData.js"});
+        });
+    });
+};
 
-changeColor.onclick = function(element) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-	chrome.tabs.executeScript (tabs[0].id, {file: 'code.js'});
+document.getElementById('fillPassengerDataCHILD').onclick = function (element) {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.executeScript(tabs[0].id, {file: 'sharedFunctions.js'}, function () {
+            chrome.tabs.executeScript(tabs[0].id, {file: "fillChildPassengerData.js"});
+        });
     });
 };

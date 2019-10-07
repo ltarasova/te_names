@@ -4,6 +4,14 @@
 
 'use strict';
 
+document.getElementById('fillAllPassengersData').onclick = function (element) {
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.executeScript(tabs[0].id, {file: 'sharedFunctions.js'}, function () {
+            chrome.tabs.executeScript(tabs[0].id, {file: "fillAllPassengersData.js"});
+        });
+    });
+};
+
 document.getElementById('fillPassengerDataADT').onclick = function (element) {
     chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
         chrome.tabs.executeScript(tabs[0].id, {file: 'sharedFunctions.js'}, function () {

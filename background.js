@@ -7,13 +7,9 @@
 chrome.runtime.onInstalled.addListener(function() {
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
-        conditions: [
-	  new chrome.declarativeContent.PageStateMatcher({
-	    pageUrl: {hostPrefix: 'hrdt'}
-	  }),
-	  new chrome.declarativeContent.PageStateMatcher({
-	    pageUrl: {hostPrefix: 'smart'}
-	  })
+        conditions: [new chrome.declarativeContent.PageStateMatcher({
+          pageUrl: {hostPrefix: 'hrdt'},
+        })
         ],
             actions: [new chrome.declarativeContent.ShowPageAction()]
       }]);

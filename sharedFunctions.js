@@ -1,58 +1,58 @@
 function simulate(element, eventName) {
-    var options = extend(defaultOptions, arguments[2] || {});
-    var oEvent, eventType = null;
+	var options = extend(defaultOptions, arguments[2] || {});
+	var oEvent, eventType = null;
 
-    for (var name in eventMatchers) {
-        if (eventMatchers[name].test(eventName)) {
-            eventType = name;
-            break;
-        }
-    }
+	for (var name in eventMatchers) {
+		if (eventMatchers[name].test(eventName)) {
+			eventType = name;
+			break;
+		}
+	}
 
-    if (!eventType)
-        throw new SyntaxError('Only HTMLEvents and MouseEvents interfaces are supported');
+	if (!eventType)
+		throw new SyntaxError('Only HTMLEvents and MouseEvents interfaces are supported');
 
-    if (document.createEvent) {
-        oEvent = document.createEvent(eventType);
-        if (eventType == 'HTMLEvents') {
-            oEvent.initEvent(eventName, options.bubbles, options.cancelable);
-        } else {
-            oEvent.initMouseEvent(eventName, options.bubbles, options.cancelable, document.defaultView,
-                options.button, options.pointerX, options.pointerY, options.pointerX, options.pointerY,
-                options.ctrlKey, options.altKey, options.shiftKey, options.metaKey, options.button, element);
-        }
-        element.dispatchEvent(oEvent);
-    } else {
-        options.clientX = options.pointerX;
-        options.clientY = options.pointerY;
-        var evt = document.createEventObject();
-        oEvent = extend(evt, options);
-        element.fireEvent('on' + eventName, oEvent);
-    }
-    return element;
+	if (document.createEvent) {
+		oEvent = document.createEvent(eventType);
+		if (eventType == 'HTMLEvents') {
+			oEvent.initEvent(eventName, options.bubbles, options.cancelable);
+		} else {
+			oEvent.initMouseEvent(eventName, options.bubbles, options.cancelable, document.defaultView,
+				options.button, options.pointerX, options.pointerY, options.pointerX, options.pointerY,
+				options.ctrlKey, options.altKey, options.shiftKey, options.metaKey, options.button, element);
+		}
+		element.dispatchEvent(oEvent);
+	} else {
+		options.clientX = options.pointerX;
+		options.clientY = options.pointerY;
+		var evt = document.createEventObject();
+		oEvent = extend(evt, options);
+		element.fireEvent('on' + eventName, oEvent);
+	}
+	return element;
 }
 
 
 function extend(destination, source) {
-    for (var property in source)
-        destination[property] = source[property];
-    return destination;
+	for (var property in source)
+		destination[property] = source[property];
+	return destination;
 }
 
 var eventMatchers = {
-    'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
-    'MouseEvents': /^(?:click|dblclick|mouse(?:down|up|over|move|out))$/
+	'HTMLEvents': /^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,
+	'MouseEvents': /^(?:click|dblclick|mouse(?:down|up|over|move|out))$/
 };
 var defaultOptions = {
-    pointerX: 0,
-    pointerY: 0,
-    button: 0,
-    ctrlKey: false,
-    altKey: false,
-    shiftKey: false,
-    metaKey: false,
-    bubbles: true,
-    cancelable: true
+	pointerX: 0,
+	pointerY: 0,
+	button: 0,
+	ctrlKey: false,
+	altKey: false,
+	shiftKey: false,
+	metaKey: false,
+	bubbles: true,
+	cancelable: true
 };
 //------------------------------------------------------------------------------------------------------//
 
@@ -70,68 +70,214 @@ var fSecName = ["ANDREEVNA", "PETROVNA", "ASHOTOVNA", "TIMOFEEVNA", "EVGENIEVNA"
 var sex = [1, 0];
 
 function getRandomArbitrary(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
+	return Math.floor(Math.random() * (max - min) + min);
 }
 
 function pad(num, size) {
-    var s = num+"";
-    while (s.length < size) s = "0" + s;
-    return s;
+	let s = num+"";
+	while (s.length < size) s = "0" + s;
+	return s;
 }
 
-function fillPassengerData(age) {
-    var display = sex[Math.floor(Math.random() * 2)];
+function fillPassengerData(age, isChild) {
 
-    var name_pax;
-    var surname_pax;
-    var fathername;
-    if (display) {
-        name_pax = mName[Math.floor(Math.random() * mName.length)];
-        surname_pax = mSurname[Math.floor(Math.random() * mSurname.length)];
-        fathername = mSecName[Math.floor(Math.random() * mSecName.length)];
-        simulate(document.getElementById('reservationStepRadioMale'), "click");
-    } else {
-        name_pax = fName[Math.floor(Math.random() * fName.length)];
-        surname_pax = fSurname[Math.floor(Math.random() * fSurname.length)];
-        fathername = fSecName[Math.floor(Math.random() * fSecName.length)];
-        simulate(document.getElementById('reservationStepRadioFemale'), "click");
-    }
-    eSurname = document.getElementById('reservationStepSurname');
-    eSurname.value = surname_pax;
-    eSurname.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+	let display = sex[Math.floor(Math.random() * 2)];
 
-    eFirstname = document.getElementById('reservationStepFirstName');
-    eFirstname.value = name_pax;
-    eFirstname.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+	let name_pax;
+	let surname_pax;
+	let fathername;
+	
+	if (display) {
+		name_pax = mName[Math.floor(Math.random() * mName.length)];
+		surname_pax = mSurname[Math.floor(Math.random() * mSurname.length)];
+		fathername = mSecName[Math.floor(Math.random() * mSecName.length)];
+		simulate(document.getElementById('reservationStepRadioMale'), "click");
+	} else {
+		name_pax = fName[Math.floor(Math.random() * fName.length)];
+		surname_pax = fSurname[Math.floor(Math.random() * fSurname.length)];
+		fathername = fSecName[Math.floor(Math.random() * fSecName.length)];
+		simulate(document.getElementById('reservationStepRadioFemale'), "click");
+	}
 
-    eFathername = document.getElementById('reservationStepMiddleName');
-    if (eFathername) {
-        eFathername.value = fathername;
-        eFathername.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
-    }
+	let eSurname = document.getElementById('reservationStepSurname');
+	eSurname.value = surname_pax;
+	eSurname.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
 
-    ePhone = document.getElementById('reservationStepPhone');
-    ePhone.value = '7777777777';
-    ePhone.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+	let eFirstname = document.getElementById('reservationStepFirstName');
+	eFirstname.value = name_pax;
+	eFirstname.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
 
+	let eFathername = document.getElementById('reservationStepMiddleName');
+	if (eFathername) {
+		eFathername.value = fathername;
+		eFathername.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+	}
 
-    let now = new Date();
-    now.setFullYear(now.getFullYear() - age);
-
-    eBirthDate = document.getElementById('reservationStepBirthDate');
-    eBirthDate.value = "" + pad(now.getDate(), 2) + pad(now.getMonth(), 2) + now.getFullYear();
-
-    eBirthDate.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
-    eBirthDate.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
-
-    eDocSeries = document.getElementById('reservationStepDocSeries');
-    eDocSeries.value = '1234';
-    eDocSeries.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
-    eDocSeries.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+	let ePhone = document.getElementById('reservationStepPhone');
+	ePhone.value = '7777777777';
+	ePhone.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
 
 
-    eDocNumber = document.getElementById('reservationStepDocNumber');
-    eDocNumber.value = '123456';
-    eDocNumber.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
-    eDocNumber.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Enter'}));
+	let now = new Date();
+	now.setFullYear(now.getFullYear() - age);
+
+	let eBirthDate = document.getElementById('reservationStepBirthDate');
+	eBirthDate.value = "" + pad(now.getDate(), 2) + pad(now.getMonth(), 2) + now.getFullYear();
+
+	eBirthDate.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+	eBirthDate.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+
+	let eDocSeries = document.getElementById('reservationStepDocSeries');
+	if (!!eDocSeries) {
+		eDocSeries.value = "1234";
+		eDocSeries.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+		eDocSeries.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+	}
+
+	let eDocNumber = document.getElementById('reservationStepDocNumber');
+	eDocNumber.value = "123456";
+	eDocNumber.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+	eDocNumber.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+
+	if (isChild) {
+		childDocValidTo = document.getElementById('reservationStepDocValidTo');
+		childDocValidTo.value = "12.12.2039";
+		childDocValidTo.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+		childDocValidTo.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+	}
+
+	fillInfantDataIfNeeded(isChild);
+}
+
+function fillInfantDataIfNeeded(isChild) {
+
+	let infantDocSeries = document.getElementById('reservationStepInfantDocSeries');
+	if (!!infantDocSeries) {
+		infantDocSeries.value = '1234';
+		infantDocSeries.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+		infantDocSeries.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+	}
+
+	let infantSurname = document.getElementById('reservationStepInfantSurname');
+
+	if (!infantSurname || isChild) {
+		return;
+	}
+
+	let infantSex = sex[Math.floor(Math.random() * 2)];
+
+	let infantNameString;
+	let infantSurnameString;
+
+	if (infantSex) {
+		infantNameString = mName[Math.floor(Math.random() * mName.length)];
+		infantSurnameString = mSurname[Math.floor(Math.random() * mSurname.length)];
+		simulate(document.getElementById('reservationStepInfantRadioMale'), "click");
+	} else {
+		infantNameString = fName[Math.floor(Math.random() * fName.length)];
+		infantSurnameString = fSurname[Math.floor(Math.random() * fSurname.length)];
+		simulate(document.getElementById('reservationStepInfantRadioFemale'), "click");
+	}
+
+	infantSurname.value = infantSurnameString;
+	infantSurname.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+
+	let infantName = document.getElementById('reservationStepInfantFirstName');
+	infantName.value = infantNameString;
+	infantName.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+
+	now = new Date();
+	now.setFullYear(now.getFullYear() - 1);
+
+	let infantBirthDate = document.getElementById('reservationStepInfantBirthDate');
+	infantBirthDate.value = "" + pad(now.getDate(), 2) + pad(now.getMonth(), 2) + now.getFullYear();
+	infantBirthDate.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+	infantBirthDate.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+
+	let ifantDocValidTo = document.getElementById('reservationStepInfantDocValidTo');
+	ifantDocValidTo.value = "12.12.2039";
+	ifantDocValidTo.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+	ifantDocValidTo.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+
+	let infantDocNumber = document.getElementById('reservationStepInfantDocNumber');
+	infantDocNumber.value = '123456';
+	infantDocNumber.dispatchEvent(new KeyboardEvent('input', {'key': 'Enter'}));
+	infantDocNumber.dispatchEvent(new KeyboardEvent('change', {'key': 'Enter'}));
+}
+
+function fillAllPassengersData() {
+	let passengers = document.querySelectorAll('div.booking-tabs > div.booking-tabs-item');
+	
+	let activePassenger; 
+
+	if (passengers && passengers.length > 0) { // обычная бронь
+
+		for (var i = 0; i < passengers.length; i++) {
+			let passenger = passengers[i];
+			let passengerActiveClass = passenger.className;
+			if (!!passengerActiveClass && passengerActiveClass.indexOf('active') != -1) {
+				activePassenger = passenger;
+			} 
+		}
+
+		for (var i = 0; i < passengers.length; i++) {
+			let passenger = passengers[i];
+			
+			if (!passenger) {
+				continue;
+			}
+
+			let passengerName = passenger.innerText;
+
+			if (!passengerName) {
+				continue;
+			}
+
+			let isAdult = isAdultString(passengerName);
+			let isChild = isChildString(passengerName)
+
+			if (isAdult) {
+				simulate(passenger, "click");
+				fillPassengerData(getRandomArbitrary(14, 80), false);
+			} else if (isChild) {
+				simulate(passenger, "click");
+				fillPassengerData(getRandomArbitrary(3, 12), true);
+			}
+		}
+
+		if (!!activePassenger) {
+			simulate(activePassenger, "click");
+		} else {
+			simulate(passengers[0], "click");
+		}
+
+	} else { // групповая бронь
+
+		let paxType;
+
+		let chosenList = document.querySelectorAll('span.select2-chosen');
+		if (!!chosenList) {
+			for (var i = 0; i < chosenList.length; i++) {
+				let chosen = chosenList[i];
+				if (!chosen || !chosen.innerText) {
+					continue
+				}
+				let chosetInnerText = chosen.innerText;
+
+				if (isAdultString(chosetInnerText)) {
+					fillPassengerData(getRandomArbitrary(14, 80), false);
+				} else if (isChildString(chosetInnerText)) {
+					fillPassengerData(getRandomArbitrary(3, 12), true);
+				}
+			}
+		}
+	}
+}
+
+function isAdultString(str) {
+	return str.indexOf('Взрослый') === 0 || str.indexOf('Adult') === 0;
+}
+
+function isChildString(str) {
+	return str.indexOf('Ребенок') === 0 || str.indexOf('Child') === 0 || str.indexOf('Ребёнок') === 0;
 }

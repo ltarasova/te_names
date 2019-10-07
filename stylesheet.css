@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  background-color: ##FEFCFF;
+}
+
+a {
+  margin: 5px;
+  opacity: .8;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 30px;
+  color: white;
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-weight: 600;
+  text-align:center;
+  --borderWidth: 0px;
+  background: ##FEFCFF;
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+
+.button_grad:after {
+  background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82) !important;
+}
+
+.button_1:after {
+   background: #6fba82 !important;
+}
+
+.button_2:after {
+   background: #359ab6 !important;
+}
+
+.button:after {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  background-size: 100% 100%;
+}
+
+.button:active {
+  transform: scale(.95);
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: .5;
+}
